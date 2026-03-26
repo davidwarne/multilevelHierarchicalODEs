@@ -44,11 +44,12 @@ Copyright (C) 2026 Thomas P. Steele and David J. Warne
 The directory structure is as follows
 |-- startup.jl                              Adds local modules functions to the Julia Path
 |-- Plotting/                               Contains code to produce figures 3 to 10 of the paper
-|-- Experiments/                            Code for generating synthetic data and running inference experiments for the internalisation model (note: requires HPC)
-|-- Experiments_affinity                    Code for generating synthetic data and running inference experiments for the pariticle-cell interaction model (note: requires HPC)
+|-- Experiments_synthetic_internalisation/  Code for generating synthetic data and running inference experiments for the internalisation model (note: requires HPC)
+|-- Experiments_synthetic_affinity/         Code for generating synthetic data and running inference experiments for the pariticle-cell interaction model (note: requires HPC)
 |-- results_final_intern/                   Inference results *.jld2 files for for plotting internalisation results.
 |-- results_final_affinity/                 Inference results *.jld2 files for for plotting particle-cell interaction results.
 |-- Data/                                   Code to extract data for experiments 
+|-- Example_real_data/                      Example analysis code for real internalisation data
 |-- Modules/                                Implementation modules for all methods in paper
     |-- Dist/
     |-- SMC/

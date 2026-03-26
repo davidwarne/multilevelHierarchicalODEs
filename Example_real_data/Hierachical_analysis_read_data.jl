@@ -24,25 +24,16 @@ hyperprior_dist = product_distribution(
     Uniform(0.0    , 0.3   ),   # 1.  σλ
     Uniform(0.0    , 0.1   ),   # 2.  σβ  
     Uniform(0.0    , 1.0    ),   # 3.  σR
-    #Uniform(0.0    , 0.5    ),   # 4.  mλ
     Uniform(0.06    , 0.2    ),   # 4.  mλ
-    #Uniform(0.0    , 0.5    ),   # 5.  mβ
     Uniform(0.03    , 0.1    ),   # 5.  mβ
     Uniform(0.0    , 1.0    ),   # 6.  mR
-#     halfCauchy(0.0 , σμλ1    ),   # 7.  sλ
-#     halfCauchy(0.0 , σμβ1    ),   # 8.  sβ   
-#     halfCauchy(0.0 , σμR1    ),   # 9.  sR
     halfCauchy(0.0 , 0.01    ),   # 7.  sλ
     halfCauchy(0.0 , 0.008    ),   # 8.  sβ   
     halfCauchy(0.0 , 0.27    ),   # 9.  sR
-
     Uniform(0.0    , 10.0   ),   # 10. σ₁
     Uniform(0.0    , 3.0    ),   # 11. σ₂
-    #Uniform(5000.0 , 12000.0),   # 12. α₁  
     Uniform(7000.0 , 10000.0),   # 12. α₁  
-    #Uniform(20.0   , 80.0   ),   # 13. α₂    
     Uniform(30.0   , 45.0   ),   # 13. α₂    
-    #Uniform(0.0    , 0.15   ),    # 14. p
     Uniform(0.0    , 0.1   ),    # 14. p
     Uniform(-2.0  , 1.0    ),  # 15.  ωλ
     Uniform(-2.0  , 1.0    )  # 16.  ωβ
@@ -61,13 +52,25 @@ T = sort(unique(data.Time))[2:end]
         (@df @subset(data,:Time .== 120.0,:Temp .== 4.0,(!).(:Quenched)) mean(:Signal_Cy5))
 
 
+# Format data to match `simulate_model` output
+X = [[[[@subset(data, :Time .== t, :Repeat .== rep, :Quenched .== qu, :Temp .== 37.0)[:,ch] 
+        for ch in [:Signal_Cy5,:Signal_BDP]] 
+        for qu in [true,false]] 
+      for rep in [1,2,3]]
+        for t  in T]
 
-# load corrupted synthetic data
-@load "Synthetic_data_v2.jld2" X_synth_corrupted
-X_synth_corrupted = X_synth_corrupted
-
-discrepancy = make_discrepancyH(X_synth_corrupted) # Make Discrepancy on all wells
-pmin = pmin/10.0
+# Extract the first N cells for analysis
+for t in 1:length(T)
+    for r in 1:3
+        for q in 1:2
+            for ch in 1:2
+                X[t][r][q][ch] = X[t][r][q][ch][1:N]
+            end
+        end
+    end
+end
+discrepancy = make_discrepancyH(X) # Make Discrepancy on all wells
+pmin = 0.0
 n = 1000
 Rtrial = 20
-ABCHybridSMC(log_hyper_prior,sample_hyper_prior,log_q,q,hyper_model,discrepancy,X_synth_corrupted,n,Rtrial,c,pmin,a,"results_par/Hierachical_synth_corrupted_internalisation")
+ABCHybridSMC(log_hyper_prior,sample_hyper_prior,log_q,q,hyper_model,discrepancy,X,n,Rtrial,c,pmin,a,"results_par/Hierachical_real_data_intern_$M")

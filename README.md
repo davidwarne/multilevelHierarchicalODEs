@@ -1,19 +1,19 @@
-# Multilevel Hierarchicak ODEs for Bayesian analysis
+# Multilevel Hierarchical ODEs for Bayesian analysis
 
 This repository contains Julia functions and scripts to implement uncertainty quantiifcation for example flow cytometry data accounting for experimental heterogeneity. 
 
 ## Developers
 
-Xiangrun Zhu$^1$ (xiangrun.zhu@connect.qut.edu.au),
-Thomas P. Steele$^1$ (tp.steele@connect.qut.edu.au),
-Alexander P. Browning$^3$ (alex.browning@unimelb.edu.au), https://scholar.google.com/citations?user=Ii-8V2cAAAAJ&hl=en
-David J. Warne$^{1,2,4}$ (david.warne@qut.edu.au), https://scholar.google.com.au/citations?user=t8l-kuoAAAAJ&hl=en
+* Xiangrun Zhu [1] (xiangrun.zhu@connect.qut.edu.au),
+* Thomas P. Steele [1] (tp.steele@connect.qut.edu.au),
+* Alexander P. Browning [2,3] (alex.browning@unimelb.edu.au), https://scholar.google.com/citations?user=Ii-8V2cAAAAJ&hl=en
+* David J. Warne [1,3,4] (david.warne@qut.edu.au), https://scholar.google.com.au/citations?user=t8l-kuoAAAAJ&hl=en
 
 
 1. School of Mathematical Sciences, Faculty of Science, Queensland Univeristy of Technology, Australia
-2. Centre for Data Science, Queensland University of Technology, Australia
-3. School of Mathematics and Statistics, University of Melbourne, Australia 
-4. ARC Centre of Excellence for the Mathematical Analysis of Cellular Systems
+2. School of Mathematics and Statistics, University of Melbourne, Australia
+3. ARC Centre of Excellence for the Mathematical Analysis of Cellular Systems
+4. Centre for Data Science, Queensland University of Technology, Australia
 
 ## Citation Information
 
